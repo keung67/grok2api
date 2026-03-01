@@ -275,6 +275,8 @@ mediaRoutes.get("/images/:imgPath{.+}", async (c) => {
     outHeaders.set("Access-Control-Allow-Origin", "*");
     outHeaders.set("Cache-Control", `public, max-age=${cacheSeconds}`);
     if (contentType) outHeaders.set("Content-Type", contentType);
+      outHeaders.delete("Content-Security-Policy");
+      outHeaders.delete("X-Frame-Options");
     return new Response(toClient, { status: upstream.status, headers: outHeaders });
   }
 
@@ -282,5 +284,7 @@ mediaRoutes.get("/images/:imgPath{.+}", async (c) => {
   outHeaders.set("Access-Control-Allow-Origin", "*");
   outHeaders.set("Cache-Control", `public, max-age=${cacheSeconds}`);
   if (contentType) outHeaders.set("Content-Type", contentType);
+    outHeaders.delete("Content-Security-Policy");
+    outHeaders.delete("X-Frame-Options");
   return new Response(upstream.body, { status: upstream.status, headers: outHeaders });
 });
