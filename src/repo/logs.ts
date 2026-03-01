@@ -63,8 +63,10 @@ function isSuccessStatus(status: number): boolean {
   return status >= 200 && status < 400;
 }
 
-function toIsoHourKey(ts: number): string {
-  const d = new Date(ts);
+const TZ_OFFSET_MS = 8 * 60 * 60 * 1000;
+
+export function toIsoHourKey(ts: number): string {
+  const d = new Date(ts + TZ_OFFSET_MS);
   const y = d.getUTCFullYear();
   const m = String(d.getUTCMonth() + 1).padStart(2, "0");
   const day = String(d.getUTCDate()).padStart(2, "0");
@@ -72,8 +74,8 @@ function toIsoHourKey(ts: number): string {
   return `${y}-${m}-${day} ${h}`;
 }
 
-function toIsoDateKey(ts: number): string {
-  const d = new Date(ts);
+export function toIsoDateKey(ts: number): string {
+  const d = new Date(ts + TZ_OFFSET_MS);
   const y = d.getUTCFullYear();
   const m = String(d.getUTCMonth() + 1).padStart(2, "0");
   const day = String(d.getUTCDate()).padStart(2, "0");
