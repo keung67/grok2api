@@ -2,8 +2,8 @@ name: Auto Reset Isolate
 
 on:
   schedule:
-    # 每 1 小時的第 0 分鐘自動執行
-    - cron: '0 */1 * * *'
+    # 每小時的第 41 分鐘自動執行
+    - cron: '41 * * * *'
   # 保留手動觸發按鈕，方便測試
   workflow_dispatch:
 
